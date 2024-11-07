@@ -23,6 +23,21 @@ services:
     networks:
       - backend
 
+angie:
+    build:
+    # docker.angie.software/angie:latest
+      context: docker/angie
+    container_name: angie
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - ./src:/var/www
+      - ./docker/angie/default.conf:/etc/angie/http.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - backend 
+      
   db:
     build:
       context: docker/mysql
