@@ -1,6 +1,8 @@
 Development environment 
 
   nginx:latest
+
+  angie:latest - russian fork of nginx
   
   php-fpm:8.3
   
