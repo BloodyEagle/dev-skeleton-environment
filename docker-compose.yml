@@ -35,6 +35,7 @@ angie:
       - ./docker/angie/default.conf:/etc/angie/http.d/default.conf
     depends_on:
       - php
+      - db
     networks:
       - backend 
       
