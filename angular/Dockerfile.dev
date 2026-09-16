@@ -1,0 +1,30 @@
+# Используем версию Node из .env файла
+ARG NODE_VERSION
+FROM node:${NODE_VERSION}-alpine
+
+# Используем версию Angular CLI из .env файла
+ARG ANGULAR_CLI_VERSION
+
+# Устанавливаем необходимые системные пакеты
+RUN apk add --no-cache \
+    git \
+    curl \
+    bash
+
+# Устанавливаем Angular CLI глобально
+RUN npm install -g @angular/cli@${ANGULAR_CLI_VERSION}
+
+# Создаем рабочую директорию
+WORKDIR /app
+
+# Копируем файлы зависимостей
+COPY ./app/package.json ./app/package-lock.json* ./
+
+# Устанавливаем зависимости
+RUN npm i --legacy-peer-deps && npm cache clean --force
+
+# Открываем порты
+EXPOSE 4200 9876 9229
+
+# Команда по умолчанию (переопределяется в docker-compose)
+CMD ["ng", "serve", "--host", "0.0.0.0"]
