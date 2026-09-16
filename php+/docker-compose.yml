@@ -23,7 +23,7 @@ services:
     networks:
       - backend
 
-angie:
+  angie:
     build:
     # docker.angie.software/angie:latest
       context: docker/angie
@@ -134,7 +134,7 @@ angie:
     networks:
         - backend
 
- rabbitmq:
+  rabbitmq:
     image: rabbitmq:3.13.3-management-alpine
     restart: always
     environment:
@@ -146,7 +146,7 @@ angie:
     networks:
         - backend
         
- mongo:
+  mongo:
     image: mongo
     #command: --serviceExecutor adaptive
     restart: always
@@ -156,7 +156,7 @@ angie:
     networks:
         - backend  
 
- mongo-express:
+  mongo-express:
     image: mongo-express
     restart: always
     ports:
@@ -168,8 +168,8 @@ angie:
       ME_CONFIG_BASICAUTH: false       
     networks:
         - backend  
- #es01:        
- elacticsearch:
+#es01:
+  elacticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.14.1
     container_name: es01
     environment:
@@ -191,4 +191,3 @@ angie:
 networks:
   backend:
     driver: bridge
-      
